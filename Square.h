@@ -20,6 +20,7 @@ class Square {
     const size_t _file;
     Piece* _occupant = nullptr;
     friend void Piece::set_location(Square* location);
+    friend void Piece::capture();
 };
 
 std::ostream& operator<<(std::ostream& os, const Square& square);

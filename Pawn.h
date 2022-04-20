@@ -11,8 +11,12 @@ class Pawn : public Piece {
     piece_value_t value() const override;
 
     bool can_move_to(const Square& location) const override;
+    bool move_to(Square& location) override;
 
     std::string str() const override;
+
+  private:
+    bool _moved = false;
 };
 
 #endif

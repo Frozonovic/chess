@@ -11,6 +11,11 @@ class Board {
     Board();
 
     Square& square_at(size_t rank, size_t file) const;
+    Square& square_at(const std::string& identifier) const;
+
+    bool is_valid_rank(const Square& from, const Square& to) const;
+    bool is_valid_file(const Square& from, const Square& to) const;
+    bool is_valid_diag(const Square& from, const Square& to) const;
 
     bool is_clear_rank(const Square& from, const Square& to) const;
     bool is_clear_file(const Square& from, const Square& to) const;

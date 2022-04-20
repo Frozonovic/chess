@@ -25,9 +25,12 @@ class Piece {
     bool is_on_square() const;
 
     virtual bool can_move_to(const Square& location) const = 0;
-    bool move_to(Square& location);
+    virtual bool move_to(Square& location);
+    void capture();
 
     virtual std::string str() const = 0;
+
+    virtual ~Piece() = default;
 
   private:
     const Piece::Color _color;
