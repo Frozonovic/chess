@@ -1,3 +1,11 @@
+/**
+ * @file Rook.cpp
+ * @brief Implementation for the Rook class
+ *
+ * @author Brody Lee (blee20@georgefox.edu)
+ */
+ 
+
 #include "Rook.h"
 
 

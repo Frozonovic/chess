@@ -1,3 +1,11 @@
+/**
+ * @file Square.cpp
+ * @brief Implementation for the Square class
+ *
+ * @author Brody Lee (blee20@georgefox.edu)
+ */
+
+
 #include "Square.h"
 
 

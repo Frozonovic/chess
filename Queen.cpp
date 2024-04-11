@@ -1,3 +1,11 @@
+/**
+ * @file Queen.cpp
+ * @brief Implementation for the Queen class
+ *
+ * @author Brody Lee (blee20@georgefox.edu)
+ */
+
+
 #include "Queen.h"
 
 

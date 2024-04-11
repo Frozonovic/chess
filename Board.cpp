@@ -74,24 +74,137 @@ bool Board::is_valid_diag(const Square& from, const Square& to) const {
 
 
 bool Board::is_clear_rank(const Square& from, const Square& to) const {
-  return is_valid_rank(from, to) && !from.is_occupied() && !from.is_occupied();
+  size_t start;
+  size_t end;
+  size_t rank = from.rank();
+  
+  if (from.file() > to.file()) {
+    start = to.file() + 1;
+    end = from.file();
+  } else {
+    start = from.file() + 1;
+    end = to.file();
+  }
+  
+  bool no_obstructions = true;
+  
+  while (start < end && no_obstructions) {
+    Square& square = square_at(rank, start);
+    
+    if (square.is_occupied()) {
+      no_obstructions = false;
+    }
+    
+    start++;
+  }
+  
+  return no_obstructions;
 }
 
 
 bool Board::is_clear_file(const Square& from, const Square& to) const {
-  return is_valid_file(from, to) && !from.is_occupied() && !to.is_occupied();
+  size_t start;
+  size_t end;
+  size_t file = from.file();
+  
+  if (from.rank() > to.rank()) {
+    start = to.rank() + 1;
+    end = from.rank();
+  } else {
+    start = from.rank() + 1;
+    end = to.rank();
+  }
+  
+  bool no_obstructions = true;
+  
+  while (start < end && no_obstructions) {
+    Square& square = square_at(start, file);
+    
+    if (square.is_occupied()) {
+      no_obstructions = false;
+    }
+    
+    start++;
+  }
+  
+  return no_obstructions;
 }
 
 
 bool Board::is_clear_diag(const Square& from, const Square& to) const {
-  return is_valid_diag(from, to) && !to.is_occupied();
+  size_t rank_start = from.rank();
+  size_t rank_end = to.rank();
+  size_t file_start = from.file();
+  size_t file_end = to.file();
+  
+  bool no_obstructions = true;
+  
+  if (from.rank() > to.rank() && from.file() > to.file()) {
+    rank_start--;
+    file_start--;
+    
+    while (rank_start > rank_end && file_start > file_end && no_obstructions) {
+      Square& square = square_at(rank_start, file_start);
+      
+      if (square.is_occupied()) {
+        no_obstructions = false;
+      }
+      
+      rank_start--;
+      file_start--;
+    }
+  } else if (from.rank() > to.rank() && from.file() < to.rank()) {
+    rank_start--;
+    file_start++;
+    
+    while (rank_start > rank_end && file_start < file_end && no_obstructions) {
+      Square& square = square_at(rank_start, file_start);
+      
+      if (square.is_occupied()) {
+        no_obstructions = false;
+      }
+      
+      rank_start--;
+      file_start++;
+    }
+  } else if (from.rank() < to.rank() && from.file() > to.file()) {
+    rank_start++;
+    file_start--;
+    
+    while (rank_start < rank_end && file_start > file_end && no_obstructions) {
+      Square& square = square_at(rank_start, file_end);
+      
+      if (square.is_occupied()) {
+        no_obstructions = false;
+      }
+      
+      rank_start++;
+      file_end--;
+    }
+  } else if (from.rank() < to.rank() && from.file() < to.file()) {
+    rank_start++;
+    file_end++;
+    
+    while (rank_start < rank_end && file_start < file_end && no_obstructions) {
+      Square& square = square_at(rank_start, file_end);
+      
+      if (square.is_occupied()) {
+        no_obstructions = false;
+      }
+      
+      rank_start++;
+      file_end++;
+    }
+  }
+  
+  return no_obstructions;
 }
 
 
 Board::~Board() {
   for (auto& section : _squares) {
-    for (auto subsect : section) {
-      delete subsect;
+    for (auto subsection : section) {
+      delete subsection;
     }
   }
 }
