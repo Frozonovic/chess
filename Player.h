@@ -1,3 +1,10 @@
+/**
+ * @file Player.h
+ * @brief Declarations for the Player calss
+ *
+ * @author Brody Lee (blee20@georgefox.edu)
+ */
+
 #ifndef PLAYER_H
 #define PLAYER_H
 
