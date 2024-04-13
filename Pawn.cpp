@@ -14,38 +14,44 @@ piece_value_t Pawn::value() const {
 
 bool Pawn::can_move_to(const Square& location) const {
     // A pawn can move exactly one space forward
-    double EPSILON = 1E-6;
-    int RANK_DIFF = 1;
-    int FILE_DIFF = 0;
-    
     Square* current_location = this->location();
-    Piece* location_occupant = location.occupant();
     
     size_t current_rank = current_location->rank();
     size_t current_file = current_location->file();
     size_t new_rank = location.rank();
     size_t new_file = location.file();
+   
+   size_t rank_diff;
+   
+   if (current_rank > new_rank) {
+      rank_diff = current_rank - new_rank;
+   } else {
+      rank_diff = new_rank - current_rank;
+   }
+   
+   size_t file_diff;
+   
+   if (current_file > new_file) {
+      file_diff = current_file - new_file;
+   } else {
+      file_diff = new_file - current_file;
+   }
     
     // Because of the pawn's normal move-set, the difference between the two ranks should equal 1
-    bool check_rank;
-    
-    if (current_rank >= new_rank) {
-      check_rank = (double)(current_rank - new_rank) - RANK_DIFF < EPSILON;
-    } else {
-      check_rank = (double)(new_rank - current_rank) - RANK_DIFF < EPSILON;
-    }
+    bool check_rank = rank_diff == 1;
     
     // Because of the pawn's normal move-set, file is a constant value
-    bool check_file;
-    if (current_file >= new_file) {
-      check_file = (double)(current_file - new_file) - FILE_DIFF < EPSILON;
-    } else {
-      check_file = (double)(new_file - current_file) - FILE_DIFF < EPSILON;
-    }
-    
-    
-    // If new location is occupied, assert that the occupant can be captured
-    bool check_color = color() != location_occupant->color();
+    bool check_file = file_diff == 0;
+   
+   // If new location is occupied, assert that the occupant can be captured
+   bool check_color;
+   
+   if (location.is_occupied()) {
+      Piece* maybe_opponent = location.occupant();
+      check_color = color() != maybe_opponent->color();
+   } else {
+      check_color = true;
+   }
     
     return check_rank && check_file && check_color;
 }
@@ -63,7 +69,7 @@ bool Pawn::move_to(Square& location) {
 
 
 std::string Pawn::str() const {
-    std::string symbol = " ";
+    std::string symbol;
     
     if (color() == Piece::Color::black) {
         symbol = "♟";

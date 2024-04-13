@@ -21,11 +21,18 @@ bool Square::is_occupied() const { return _occupant != nullptr; }
 Piece* Square::occupant() const { return _occupant; }
 
 
-void Square::set_occupant(Piece* occupant) { _occupant = occupant; }
+void Square::set_occupant(Piece* occupant) {
+   _occupant = occupant;
+   occupant->set_location(this);
+}
 
 
 std::ostream& operator<<(std::ostream& os, const Square& square) {
-    os << " ";
-    
-    return os;
+   if (square.is_occupied()) {
+      os << " " << square.occupant()->str() << " ";
+   } else {
+      os << "   ";
+   }
+   
+   return os;
 }
