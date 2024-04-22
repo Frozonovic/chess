@@ -15,19 +15,65 @@
  * @return 0 on success, else non-zero on failure
  */
 int main() {
-   Board b = Board();
-   Square& a4 = b.square_at("a4");
-   Square& a5 = b.square_at("a5");
-   Square& b4 = b.square_at("b4");
-   Square& c6 = b.square_at("c6");
+   size_t turn_counter = 0;
    
-   Pawn p = Pawn(Piece::Color::white, a4);
-   Queen q = Queen(Piece::Color::white, c6);
+   // Create the board
+   Board board = Board();
    
-   std::ostream& o = std::cout;
-   o << b << std::endl;
-   o << b.is_valid_rank(a4, b4) << std::endl;
-   o << b.is_valid_file(a4, a5) << std::endl;
-   o << b.is_valid_diag(a4, c6) << std::endl;
+   // Create the players
+   Player white_player = Player(Piece::Color::white, board);
+   Player black_player = Player(Piece::Color::black, board);
+   
+   while (turn_counter < 20) {
+      std::string desired_move;
+      std::vector<std::string> tokens;
+      bool move_completed;
+      
+      // Print board
+      std::cout << board << std::endl;
+      
+      if (turn_counter % 2 == 0) {
+         // White goes on even numbers
+         std::cout << "White's turn! Where would you like to move?" << std::endl;
+         getline(std::cin, desired_move);
+         
+         // Tokenize input
+         tokenizer(tokens, desired_move, ' ');
+         
+         // Attempt to make the move
+         move_completed = white_player.make_move(tokens[0], tokens[1]);
+         
+         if (move_completed) {
+            turn_counter++;
+         } else {
+            std::cout << "Illegal movement. Please try again." << std::endl;
+         }
+      } else {
+         // Black goes on odd numbers
+         std::cout << "Black's turn! Where would you like to move?" << std::endl;
+         getline(std::cin, desired_move);
+         
+         // Tokenize input
+         tokenizer(tokens, desired_move, ' ');
+         
+         // Attempt to make the move
+         move_completed = black_player.make_move(tokens[0], tokens[1]);
+         
+         if (move_completed) {
+            turn_counter++;
+         } else {
+            std::cout << "Illegal movement. Please try again." << std::endl;
+         }
+      }
+   }
 }
 
+
+void tokenizer(std::vector<std::string> &buffer, const std::string &s, const char delimiter) {
+   std::stringstream ss(s);
+   std::string token;
+   while (!ss.eof()) {
+      getline(ss, token, delimiter);
+      buffer.push_back(token);
+   }
+}

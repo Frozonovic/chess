@@ -8,6 +8,8 @@
 #define PAWN_H
 
 
+#include <cstddef>
+#include <cstdlib>
 #include <string>
 #include "Square.h"
 #include "Piece.h"
@@ -27,7 +29,7 @@ class Pawn : public Piece {
        * @param color Color to distinguish between the two teams
        * @param location Default location on the board
        */
-      Pawn(Piece::Color color, Square& location) : Piece(color, location) {}
+      Pawn(Piece::Color color, Square &location) : Piece(color, location) {}
       
       
       /**
@@ -44,7 +46,7 @@ class Pawn : public Piece {
        * @param location Square to consider movement to
        * @return True if location is in the pawn's move-set, else false
        */
-      bool can_move_to(const Square& location) const override;
+      bool can_move_to(const Square &location) const override;
       
       
       /**
@@ -53,7 +55,7 @@ class Pawn : public Piece {
        * @param location New square to move to
        * @return True if move is completed, else false
        */
-      bool move_to(Square& location) override;
+      bool move_to(Square &location) override;
       
       
       /**

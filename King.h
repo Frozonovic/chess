@@ -10,6 +10,8 @@
 #define KING_H
 
 
+#include <cstddef>
+#include <cstdlib>
 #include <string>
 #include "Square.h"
 #include "Piece.h"
@@ -29,7 +31,7 @@ class King : public Piece {
        * @param color Color to distinguish between the two teams
        * @param location Default location on the board
        */
-      explicit King(Piece::Color color, Square& location) : Piece(color, location) {}
+      explicit King(Piece::Color color, Square &location) : Piece(color, location) {}
       
       
       /**
@@ -46,7 +48,7 @@ class King : public Piece {
        * @param location Square to consider movement to
        * @return True if location is in the king's move-set, else false
        */
-      bool can_move_to(const Square& location) const override;
+      bool can_move_to(const Square &location) const override;
       
       
       /**

@@ -10,8 +10,10 @@
 #define SQUARE_H
 
 
+#include <cstddef>
 #include <cstdlib>
 #include <iostream>
+#include <string>
 #include "Piece.h"
 
 
@@ -59,12 +61,12 @@ class Square {
        *
        * @return Occupant of the square
        */
-      Piece* occupant() const;
+      Piece *occupant() const;
    
-      
+   
    private:
       /** Changes the occupant of the square */
-      void set_occupant(Piece* occupant);
+      void set_occupant(Piece *occupant);
       
       
       /** Row the square is in on the board */
@@ -76,11 +78,11 @@ class Square {
       
       
       /** Current occupant of the square */
-      Piece* _occupant = nullptr;
+      Piece *_occupant = nullptr;
       
       
       /** Method from Piece class that changes the square a piece is assigned to */
-      friend void Piece::set_location(Square* location);
+      friend void Piece::set_location(Square *location);
       
       
       /** Method from Piece class that captures a piece and removes it from the board */
@@ -95,7 +97,7 @@ class Square {
  * @param square Square to output
  * @return Updated stream output
  */
-std::ostream& operator<<(std::ostream& os, const Square& square);
+std::ostream &operator<<(std::ostream &os, const Square &square);
 
 
 #endif

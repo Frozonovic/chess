@@ -7,8 +7,9 @@
 #define KNIGHT_H
 
 
-#include <cstdlib>
 #include <cmath>
+#include <cstddef>
+#include <cstdlib>
 #include <string>
 #include "Square.h"
 #include "Piece.h"
@@ -28,7 +29,7 @@ class Knight : public Piece {
        * @param color Color to distinguish between the two teams
        * @param location Default location on the board
        */
-      Knight(Piece::Color color, Square& location) : Piece(color, location) {}
+      Knight(Piece::Color color, Square &location) : Piece(color, location) {}
       
       
       /**
@@ -45,7 +46,7 @@ class Knight : public Piece {
        * @param location Square to consider movement to
        * @return True if location is in the knight's move-set, else false
        */
-      bool can_move_to(const Square& location) const override;
+      bool can_move_to(const Square &location) const override;
       
       
       /**

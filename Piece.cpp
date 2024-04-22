@@ -13,23 +13,31 @@
 Piece::Color Piece::color() const { return _color; }
 
 
-Square* Piece::location() const { return _location; }
+Square *Piece::location() const { return _location; }
 
 
-void Piece::set_location(Square* location) {
-   _location = location;
-   location->_occupant = this;
+void Piece::set_location(Square *location) {
+   if (this->_location != nullptr) {
+      this->_location->_occupant = nullptr;
+   }
+   
+   this->_location = location;
+   
+   if (location != nullptr) {
+      location->_occupant = this;
+   }
+   
 }
 
 
-bool Piece::is_on_square() const { return _location != nullptr; }
+bool Piece::is_on_square() const { return this->_location != nullptr; }
 
 
-bool Piece::move_to(Square& location) {
+bool Piece::move_to(Square &location) {
    bool move_completed = false;
    
-   if (can_move_to(location)) {
-      set_location(&location);
+   if (this->can_move_to(location)) {
+      this->set_location(&location);
       move_completed = true;
    }
    
@@ -42,7 +50,7 @@ void Piece::capture() {
 }
 
 
-std::ostream& operator<<(std::ostream& os, const Piece& piece) {
+std::ostream &operator<<(std::ostream &os, const Piece &piece) {
    os << piece.str();
    
    return os;

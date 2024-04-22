@@ -10,12 +10,18 @@
 #define PLAYER_H
 
 
+#include <cstddef>
 #include <cstdlib>
-#include <vector>
 #include <string>
+#include <vector>
 #include "Board.h"
 #include "Piece.h"
 #include "King.h"
+#include "Queen.h"
+#include "Rook.h"
+#include "Knight.h"
+#include "Bishop.h"
+#include "Pawn.h"
 
 
 /**
@@ -30,7 +36,7 @@ class Player {
        * @param color Color of the player's team
        * @param board Board the player will use
        */
-      Player(Piece::Color color, const Board& board);
+      Player(Piece::Color color, const Board &board);
       
       
       /**
@@ -48,7 +54,7 @@ class Player {
        * @param to Arrival square
        * @return True if move is possible, else false
        */
-      bool make_move(const std::string& from, const std::string& to);
+      bool make_move(const std::string &from, const std::string &to);
       
       
       /**
@@ -70,17 +76,16 @@ class Player {
       
       
       /** Board the game is taking place on */
-      const Board& _board;
+      const Board &_board;
       
       
       /** List of the player's pieces */
-      std::vector<Piece*> _pieces;
+      std::vector<Piece *> _pieces;
       
       
       /** The player's King */
-      King* _king;
+      King *_king;
 };
 
 
 #endif
-

@@ -10,6 +10,8 @@
 #define PIECE_H
 
 
+#include <cstddef>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 
@@ -39,7 +41,7 @@ class Piece {
        * @param color Color to distinguish between the two teams
        * @param location Default location on the board
        */
-      Piece(const Piece::Color color, Square& location) : _color(color) {
+      Piece(const Piece::Color color, Square &location) : _color(color) {
          this->set_location(&location);
       }
       
@@ -65,7 +67,7 @@ class Piece {
        *
        * @return Current location of the piece
        */
-      Square* location() const;
+      Square *location() const;
       
       
       /**
@@ -73,7 +75,7 @@ class Piece {
        *
        * @param location Square to move the piece to
        */
-      void set_location(Square* location);
+      void set_location(Square *location);
       
       
       /**
@@ -90,7 +92,7 @@ class Piece {
        * @param location Square to consider movement to
        * @return True if location is in the piece's move-set, else false
        */
-      virtual bool can_move_to(const Square& location) const = 0;
+      virtual bool can_move_to(const Square &location) const = 0;
       
       
       /**
@@ -99,7 +101,7 @@ class Piece {
        * @param location New square to move to
        * @return True if move is completed, else false
        */
-      virtual bool move_to(Square& location);
+      virtual bool move_to(Square &location);
       
       
       /**
@@ -126,7 +128,7 @@ class Piece {
       const Piece::Color _color;
       
       /** Current location of the piece */
-      Square* _location = nullptr;
+      Square *_location = nullptr;
 };
 
 
@@ -137,7 +139,7 @@ class Piece {
  * @param piece Piece to output
  * @return Updated stream output
  */
-std::ostream& operator<<(std::ostream& os, const Piece& piece);
+std::ostream &operator<<(std::ostream &os, const Piece &piece);
 
 
 #endif

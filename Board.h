@@ -10,6 +10,7 @@
 #define BOARD_H
 
 
+#include <cstddef>
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -40,7 +41,7 @@ class Board {
        * @param file Column the space is in
        * @return Square on the board
        */
-      Square& square_at(size_t rank, size_t file) const;
+      Square &square_at(size_t rank, size_t file) const;
       
       
       /**
@@ -49,7 +50,7 @@ class Board {
        * @param identifier String value consisting of a letter and number
        * @return Square on the board
        */
-      Square& square_at(const std::string& identifier) const;
+      Square &square_at(const std::string &identifier) const;
       
       
       /**
@@ -59,7 +60,7 @@ class Board {
        * @param to Second square for comparison
        * @return True if in the same rank, else false
        */
-      bool is_valid_rank(const Square& from, const Square& to) const;
+      bool is_valid_rank(const Square &from, const Square &to) const;
       
       
       /**
@@ -69,7 +70,7 @@ class Board {
        * @param to Second square for comparison
        * @return
        */
-      bool is_valid_file(const Square& from, const Square& to) const;
+      bool is_valid_file(const Square &from, const Square &to) const;
       
       
       /**
@@ -79,7 +80,7 @@ class Board {
        * @param to Second square for comparison
        * @return True if in the same diagonal, else false
        */
-      bool is_valid_diag(const Square& from, const Square& to) const;
+      bool is_valid_diag(const Square &from, const Square &to) const;
       
       
       /**
@@ -89,7 +90,7 @@ class Board {
        * @param to Second square for comparison
        * @return True if nothing obstructs the rank path between the two squares, else false
        */
-      bool is_clear_rank(const Square& from, const Square& to) const;
+      bool is_clear_rank(const Square &from, const Square &to) const;
       
       
       /**
@@ -99,7 +100,7 @@ class Board {
        * @param to Second square for comparison
        * @return True if nothing obstructs the file path between the two squares, else false
        */
-      bool is_clear_file(const Square& from, const Square& to) const;
+      bool is_clear_file(const Square &from, const Square &to) const;
       
       
       /**
@@ -109,7 +110,7 @@ class Board {
        * @param to Second square for comparison
        * @return True if nothing obstructs the diagonal path between the two squares, else false
        */
-      bool is_clear_diag(const Square& from, const Square& to) const;
+      bool is_clear_diag(const Square &from, const Square &to) const;
       
       
       /**
@@ -119,7 +120,7 @@ class Board {
    
    private:
       /** List of all squares in the board */
-      Square* _squares[SIZE][SIZE] = {};
+      Square *_squares[SIZE][SIZE] = {};
 };
 
 
@@ -130,7 +131,7 @@ class Board {
  * @param board Board to output
  * @return Updated stream output
  */
-std::ostream& operator<<(std::ostream& os, const Board &board);
+std::ostream &operator<<(std::ostream &os, const Board &board);
 
 
 #endif

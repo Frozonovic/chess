@@ -14,9 +14,9 @@ piece_value_t Bishop::value() const {
 }
 
 
-bool Bishop::can_move_to(const Square& location) const {
+bool Bishop::can_move_to(const Square &location) const {
    // The bishop can move diagonally any number of squares
-   Square* current_location = this->location();
+   Square *current_location = this->location();
    
    size_t current_rank = current_location->rank();
    size_t current_file = current_location->file();
@@ -46,7 +46,7 @@ bool Bishop::can_move_to(const Square& location) const {
    bool check_color;
    
    if (location.is_occupied()) {
-      Piece* maybe_opponent = location.occupant();
+      Piece *maybe_opponent = location.occupant();
       check_color = color() != maybe_opponent->color();
    } else {
       check_color = true;

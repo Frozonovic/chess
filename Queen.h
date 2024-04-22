@@ -9,7 +9,8 @@
 #ifndef QUEEN_H
 #define QUEEN_H
 
-
+#include <cstddef>
+#include <cstdlib>
 #include <string>
 #include "Square.h"
 #include "Piece.h"
@@ -29,7 +30,7 @@ class Queen : public Piece {
        * @param color Color to distinguish between the two teams
        * @param location Default location on the board
        */
-      Queen(Piece::Color color, Square& location) : Piece(color, location) {}
+      Queen(Piece::Color color, Square &location) : Piece(color, location) {}
       
       
       /**
@@ -46,7 +47,7 @@ class Queen : public Piece {
        * @param location Square to consider movement to
        * @return True if location is in the queen's move-set, else false
        */
-      bool can_move_to(const Square& location) const override;
+      bool can_move_to(const Square &location) const override;
       
       
       /**

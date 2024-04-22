@@ -18,16 +18,16 @@ size_t Square::file() const { return _file; }
 bool Square::is_occupied() const { return _occupant != nullptr; }
 
 
-Piece* Square::occupant() const { return _occupant; }
+Piece *Square::occupant() const { return _occupant; }
 
 
-void Square::set_occupant(Piece* occupant) {
+void Square::set_occupant(Piece *occupant) {
    _occupant = occupant;
    occupant->set_location(this);
 }
 
 
-std::ostream& operator<<(std::ostream& os, const Square& square) {
+std::ostream &operator<<(std::ostream &os, const Square &square) {
    if (square.is_occupied()) {
       os << " " << square.occupant()->str() << " ";
    } else {

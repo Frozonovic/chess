@@ -14,11 +14,11 @@ piece_value_t King::value() const {
 }
 
 
-bool King::can_move_to(const Square& location) const {
+bool King::can_move_to(const Square &location) const {
    // The king can move horizontally, vertically, or diagonally a single space
    int DIAG_DIST = 2;
    
-   Square* current_location = this->location();
+   Square *current_location = this->location();
    
    size_t current_rank = current_location->rank();
    size_t current_file = current_location->file();
@@ -55,7 +55,7 @@ bool King::can_move_to(const Square& location) const {
    bool check_color;
    
    if (location.is_occupied()) {
-      Piece* maybe_opponent = location.occupant();
+      Piece *maybe_opponent = location.occupant();
       check_color = color() != maybe_opponent->color();
    } else {
       check_color = true;
@@ -70,9 +70,9 @@ std::string King::str() const {
    std::string symbol;
    
    if (color() == Piece::Color::black) {
-      symbol = "♚";
+      symbol = "♚"; // Should be on e8 at the start
    } else if (color() == Piece::Color::white) {
-      symbol = "♔";
+      symbol = "♔"; // Should be on e1 at the start
    }
    
    return symbol;

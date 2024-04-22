@@ -12,22 +12,22 @@
 Board::Board() {
    for (int i = 0; i < SIZE; ++i) {
       for (int j = 0; j < SIZE; ++j) {
-         _squares[i][j] = new Square(i + 1, j + 1);
+         _squares[i][j] = new Square(i, j);
       }
    }
 }
 
 
 Square& Board::square_at(size_t rank, size_t file) const {
-   return *(_squares[file - 1][rank - 1]);
+   return *(_squares[rank][file]);
 }
 
 
 Square& Board::square_at(const std::string& identifier) const {
    const char *chars = identifier.c_str();
    
-   size_t rank = int(toupper(chars[0]) - int('A') + 1);
-   size_t file = ((int('1') - int(chars[1])) + 7) + 1;
+   size_t rank = int('8') - int(chars[1]);
+   size_t file = int(toupper(chars[0]) - int('A'));
    
    return square_at(rank, file);
 }
@@ -221,7 +221,7 @@ Board::~Board() {
 std::ostream& operator<<(std::ostream& os, const Board &board) {
    char letters[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
    
-   os << ' ';
+   os << " ";
    
    for (auto letter : letters) {
       os << "   " << letter;
@@ -229,22 +229,22 @@ std::ostream& operator<<(std::ostream& os, const Board &board) {
    
    os << "\n  ┌───┬───┬───┬───┬───┬───┬───┬───┐\n";
    
-   for (int i = 1; i < Board::SIZE * 2; ++i) {
-      if (i % 2 == 0) {
+   for (int i = 0; i < (Board::SIZE * 2) - 1; ++i) {
+      if (i % 2 != 0) {
          os << "  ├───┼───┼───┼───┼───┼───┼───┼───┤\n";
       } else {
-         os << std::to_string(Board::SIZE - ((i - 1) / 2)) << " │";
+         os << std::to_string(Board::SIZE - (i / 2)) << " │";
       }
-      for (int j = 1; j <= Board::SIZE; ++j) {
-         if (i % 2 != 0) {
-            Square& square = board.square_at(j, ((i - 1) / 2) + 1);
+      for (int j = 0; j < Board::SIZE; ++j) {
+         if (i % 2 == 0 && i < (Board::SIZE * 2) + 1) {
+            Square& square = board.square_at(i / 2, j);
             
             os << square << "│";
          }
       }
       
-      if (i % 2 != 0) {
-         os << " " << std::to_string(Board::SIZE - ((i - 1) / 2)) << "\n";
+      if (i % 2 == 0) {
+         os << " " << std::to_string(Board::SIZE - (i / 2)) << "\n";
       }
    }
    
